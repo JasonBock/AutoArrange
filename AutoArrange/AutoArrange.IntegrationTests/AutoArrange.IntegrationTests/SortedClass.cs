@@ -2,16 +2,16 @@
 
 namespace AutoArrange.Tests
 {
-    public class SortedClass
+	public class SortedClass
 	{
 		public void Two() { }
-        /// <summary>
-        /// What happens to comments?
-        /// </summary>
-        public void One() { }
-    }
+		/// <summary>
+		/// What happens to comments?
+		/// </summary>
+		public void One() { }
+	}
 
-    public struct SortedStruct
+	public struct SortedStruct
 	{
 		public void YourMethod() { }
 		public Guid AField;
