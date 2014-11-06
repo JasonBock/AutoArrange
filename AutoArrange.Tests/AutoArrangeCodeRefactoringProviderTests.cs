@@ -1,4 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,10 +28,14 @@ public class MyClass
 }";
 
 			var document = AutoArrangeCodeRefactoringProviderTests.CreateDocument(code);
+			var actions = new List<CodeAction>();
+			var actionRegistration = new Action<CodeAction>(action => actions.Add(action));
+			var context = new CodeRefactoringContext(document, new TextSpan(55, 8), 
+				actionRegistration, new CancellationToken(false));
 
 			var provider = new AutoArrangeCodeRefactoringProvider();
-			var actions = (await provider.GetRefactoringsAsync(document, 
-				new TextSpan(55, 8), new CancellationToken(false))).ToList();
+			await provider.ComputeRefactoringsAsync(context);
+
 			Assert.AreEqual(0, actions.Count);
       }
 
@@ -45,10 +51,13 @@ public class MyClass
 }";
 
 			var document = AutoArrangeCodeRefactoringProviderTests.CreateDocument(code);
+			var actions = new List<CodeAction>();
+			var actionRegistration = new Action<CodeAction>(action => actions.Add(action));
+			var context = new CodeRefactoringContext(document, new TextSpan(30, 7),
+				actionRegistration, new CancellationToken(false));
 
 			var provider = new AutoArrangeCodeRefactoringProvider();
-			var actions = (await provider.GetRefactoringsAsync(document,
-				new TextSpan(30, 7), new CancellationToken(false))).ToList();
+			await provider.ComputeRefactoringsAsync(context);
 			Assert.AreEqual(0, actions.Count);
 		}
 
@@ -65,10 +74,13 @@ public class MyClass
 }";
 
 			var document = AutoArrangeCodeRefactoringProviderTests.CreateDocument(code);
+			var actions = new List<CodeAction>();
+			var actionRegistration = new Action<CodeAction>(action => actions.Add(action));
+			var context = new CodeRefactoringContext(document, new TextSpan(30, 7),
+				actionRegistration, new CancellationToken(false));
 
 			var provider = new AutoArrangeCodeRefactoringProvider();
-			var actions = (await provider.GetRefactoringsAsync(document,
-				new TextSpan(30, 7), new CancellationToken(false))).ToList();
+			await provider.ComputeRefactoringsAsync(context);
 			Assert.AreEqual(1, actions.Count);
 		}
 
@@ -81,13 +93,13 @@ public class MyClass
 				 .CurrentSolution
 				 .AddProject(projectId, projectName, projectName, LanguageNames.CSharp)
 				 .AddMetadataReference(projectId,
-					new MetadataFileReference(typeof(object).Assembly.Location, MetadataImageKind.Assembly))
+					MetadataReference.CreateFromAssembly(typeof(object).Assembly))
 				 .AddMetadataReference(projectId,
-					new MetadataFileReference(typeof(Enumerable).Assembly.Location, MetadataImageKind.Assembly))
+					MetadataReference.CreateFromAssembly(typeof(Enumerable).Assembly))
 				 .AddMetadataReference(projectId,
-					new MetadataFileReference(typeof(CSharpCompilation).Assembly.Location, MetadataImageKind.Assembly))
+					MetadataReference.CreateFromAssembly(typeof(CSharpCompilation).Assembly))
 				 .AddMetadataReference(projectId,
-					new MetadataFileReference(typeof(Compilation).Assembly.Location, MetadataImageKind.Assembly));
+					MetadataReference.CreateFromAssembly(typeof(Compilation).Assembly));
 
 			var documentId = DocumentId.CreateNewId(projectId);
 			solution = solution.AddDocument(documentId, "Test.cs", SourceText.From(code));
