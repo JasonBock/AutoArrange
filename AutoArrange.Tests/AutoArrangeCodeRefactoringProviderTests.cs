@@ -88,7 +88,7 @@ public class MyClass
 			var projectName = "Test";
 			var projectId = ProjectId.CreateNewId(projectName);
 
-			var solution = new CustomWorkspace()
+			var solution = new AdhocWorkspace()
 				 .CurrentSolution
 				 .AddProject(projectId, projectName, projectName, LanguageNames.CSharp)
 				 .AddMetadataReference(projectId,

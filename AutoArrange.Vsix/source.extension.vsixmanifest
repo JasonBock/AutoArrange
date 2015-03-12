@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="AutoArrange.Vsix..7e7dc21d-49f0-42d0-ab91-33c3a6e2b62a" Version="1.0" Language="en-US" Publisher="JASON"/>
+    <Identity Id="AutoArrange.Vsix..9f176d83-47b1-434d-b1d5-fa19ed11e7f5" Version="1.0" Language="en-US" Publisher="JASON"/>
     <DisplayName>AutoArrange.Vsix</DisplayName>
     <Description xml:space="preserve">This is a sample code refactoring extension for the .NET Compiler Platform ("Roslyn").</Description>
   </Metadata>
