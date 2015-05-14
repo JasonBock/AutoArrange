@@ -39,8 +39,8 @@ public class MyClass
 	public event EventHandler MyEventB;
 	public string MyFieldA;
 	public string MyFieldB;
-	public MyClass(int value) { };
 	public MyClass() { };
+	public MyClass(int value) { };
 	public void MyMethodA() { }
 	public void MyMethodB() { }
 	public string MyPropertyA { get; set; }

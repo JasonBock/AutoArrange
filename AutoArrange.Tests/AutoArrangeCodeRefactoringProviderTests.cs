@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,71 +17,38 @@ namespace AutoArrange.Tests
 	public sealed class AutoArrangeCodeRefactoringProviderTests
 	{
 		[TestMethod]
-		public async Task RefactorWhenTargetIsNotTypeDelcaraction()
+		public async Task RefactorWhenTargetIsNotTypeDeclaration()
 		{
-			var code = @"
-using System;
-
-public class MyClass
-{
-	public void MyMethod() { }
-}";
-
-			var document = AutoArrangeCodeRefactoringProviderTests.CreateDocument(code);
-			var actions = new List<CodeAction>();
-			var actionRegistration = new Action<CodeAction>(action => actions.Add(action));
-			var context = new CodeRefactoringContext(document, new TextSpan(55, 8), 
-				actionRegistration, new CancellationToken(false));
-
-			var provider = new AutoArrangeCodeRefactoringProvider();
-			await provider.ComputeRefactoringsAsync(context);
-
-			Assert.AreEqual(0, actions.Count);
-      }
+			await AutoArrangeCodeRefactoringProviderTests.TestProvider(
+				@"Targets\TargetIsNotTypeDeclaration.cs", new TextSpan(30, 7), 0);
+		}
 
 		[TestMethod]
 		public async Task RefactorWhenCodeDoesNotNeedRefactoring()
 		{
-			var code = @"
-using System;
-
-public class MyClass
-{
-	public void MyMethod() { }
-}";
-
-			var document = AutoArrangeCodeRefactoringProviderTests.CreateDocument(code);
-			var actions = new List<CodeAction>();
-			var actionRegistration = new Action<CodeAction>(action => actions.Add(action));
-			var context = new CodeRefactoringContext(document, new TextSpan(30, 7),
-				actionRegistration, new CancellationToken(false));
-
-			var provider = new AutoArrangeCodeRefactoringProvider();
-			await provider.ComputeRefactoringsAsync(context);
-			Assert.AreEqual(0, actions.Count);
+			await AutoArrangeCodeRefactoringProviderTests.TestProvider(
+				@"Targets\CodeDoesNotNeedRefactoring.cs", new TextSpan(30, 7), 0);
 		}
 
 		[TestMethod]
 		public async Task RefactorWhenCodeNeedsRefactoring()
 		{
-			var code = @"
-using System;
+			await AutoArrangeCodeRefactoringProviderTests.TestProvider(
+				@"Targets\CodeNeedsRefactoring.cs", new TextSpan(30, 7), 1);
+		}
 
-public class MyClass
-{
-	public void MyMethodB() { }
-	public void MyMethodA() { }
-}";
-
+		private static async Task TestProvider(string file, TextSpan span, int expectedActionCount)
+		{
+			var code = File.ReadAllText(file);
 			var document = AutoArrangeCodeRefactoringProviderTests.CreateDocument(code);
 			var actions = new List<CodeAction>();
 			var actionRegistration = new Action<CodeAction>(action => actions.Add(action));
-			var context = new CodeRefactoringContext(document, new TextSpan(30, 7),
+			var context = new CodeRefactoringContext(document, span,
 				actionRegistration, new CancellationToken(false));
 
 			var provider = new AutoArrangeCodeRefactoringProvider();
 			await provider.ComputeRefactoringsAsync(context);
-			Assert.AreEqual(1, actions.Count);
+			Assert.AreEqual(expectedActionCount, actions.Count);
 		}
 
 		internal static Document CreateDocument(string code)
