@@ -60,13 +60,13 @@ namespace AutoArrange.Tests
 				 .CurrentSolution
 				 .AddProject(projectId, projectName, projectName, LanguageNames.CSharp)
 				 .AddMetadataReference(projectId,
-					MetadataReference.CreateFromAssembly(typeof(object).Assembly))
+					MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
 				 .AddMetadataReference(projectId,
-					MetadataReference.CreateFromAssembly(typeof(Enumerable).Assembly))
+					MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
 				 .AddMetadataReference(projectId,
-					MetadataReference.CreateFromAssembly(typeof(CSharpCompilation).Assembly))
+					MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location))
 				 .AddMetadataReference(projectId,
-					MetadataReference.CreateFromAssembly(typeof(Compilation).Assembly));
+					MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location));
 
 			var documentId = DocumentId.CreateNewId(projectId);
 			solution = solution.AddDocument(documentId, "Test.cs", SourceText.From(code));
