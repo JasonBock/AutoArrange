@@ -1,15 +1,14 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace AutoArrange.Tests
 {
-	[TestClass]
-	public sealed class AutoArrangeReplaceRewriterTests
+	public static class AutoArrangeReplaceRewriterTests
 	{
-		[TestMethod]
-		public void VerifyRewriter()
+		[Test]
+		public static void VerifyRewriter()
 		{
 			var code = @"
 using System;

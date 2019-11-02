@@ -11,7 +11,7 @@ namespace AutoArrange
 		: CSharpSyntaxRewriter
 	{
 		private int count;
-		private List<SyntaxNode> nodes;
+		private readonly List<SyntaxNode> nodes;
 
 		public AutoArrangeReplaceRewriter(
 			AutoArrangeCaptureWalker walker)
@@ -72,52 +72,34 @@ namespace AutoArrange
 			return result;
 		}
 
-		public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node) => 
+			this.Replace(node);
 
-		public override SyntaxNode VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitConstructorDeclaration(ConstructorDeclarationSyntax node) =>
+			this.Replace(node);
 
-		public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node) => 
+			this.Replace(node);
 
-		public override SyntaxNode VisitEventFieldDeclaration(EventFieldDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitEventFieldDeclaration(EventFieldDeclarationSyntax node) =>
+			this.Replace(node);
 
-		public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node) =>
+			this.Replace(node);
 
-		public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node) =>
+			this.Replace(node);
 
-		public override SyntaxNode VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitPropertyDeclaration(PropertyDeclarationSyntax node) =>
+			this.Replace(node);
 
-		public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
-		{
-			return this.Replace(node);
-		}
+		public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node) =>
+			this.Replace(node);
 
 		public TypeDeclarationSyntax VisitTypeDeclaration(
 			TypeDeclarationSyntax node)
 		{
-			var classNode = node as ClassDeclarationSyntax;
-
-			if (classNode != null)
+			if (node is ClassDeclarationSyntax classNode)
 			{
 				return base.VisitClassDeclaration(classNode)
 					as ClassDeclarationSyntax;

@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,29 +13,22 @@ using System.Threading.Tasks;
 
 namespace AutoArrange.Tests
 {
-	[TestClass]
-	public sealed class AutoArrangeCodeRefactoringProviderTests
+	public static class AutoArrangeCodeRefactoringProviderTests
 	{
-		[TestMethod]
-		public async Task RefactorWhenTargetIsNotTypeDeclaration()
-		{
+		[Test]
+		public static async Task RefactorWhenTargetIsNotTypeDeclaration() => 
 			await AutoArrangeCodeRefactoringProviderTests.TestProvider(
 				@"Targets\TargetIsNotTypeDeclaration.cs", new TextSpan(30, 7), 0);
-		}
 
-		[TestMethod]
-		public async Task RefactorWhenCodeDoesNotNeedRefactoring()
-		{
+		[Test]
+		public static async Task RefactorWhenCodeDoesNotNeedRefactoring() => 
 			await AutoArrangeCodeRefactoringProviderTests.TestProvider(
 				@"Targets\CodeDoesNotNeedRefactoring.cs", new TextSpan(30, 7), 0);
-		}
 
-		[TestMethod]
-		public async Task RefactorWhenCodeNeedsRefactoring()
-		{
+		[Test]
+		public static async Task RefactorWhenCodeNeedsRefactoring() => 
 			await AutoArrangeCodeRefactoringProviderTests.TestProvider(
 				@"Targets\CodeNeedsRefactoring.cs", new TextSpan(30, 7), 1);
-		}
 
 		private static async Task TestProvider(string file, TextSpan span, int expectedActionCount)
 		{

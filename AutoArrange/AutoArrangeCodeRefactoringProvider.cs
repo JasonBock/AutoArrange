@@ -13,22 +13,17 @@ namespace AutoArrange
 	public sealed class AutoArrangeCodeRefactoringProvider 
 		: CodeRefactoringProvider
 	{
-		public const string RefactoringId = "AutoArrangeCodeRefactoringProvider";
+		public const string RefactoringId = nameof(AutoArrangeCodeRefactoringProvider);
 
 		public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
 		{
 			var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
-			if (context.CancellationToken.IsCancellationRequested)
-			{
-				return;
-			}
+			context.CancellationToken.ThrowIfCancellationRequested();
 
 			var node = root.FindNode(context.Span);
 
-			var typeDeclaration = node as TypeDeclarationSyntax;
-
-			if (typeDeclaration != null)
+			if (node is TypeDeclarationSyntax typeDeclaration)
 			{
 				var newDocument = await AutoArrangeCodeRefactoringProvider.AutoArrangeMembersInType(
 					context.Document, typeDeclaration, context.CancellationToken);
@@ -40,8 +35,6 @@ namespace AutoArrange
 							_ => Task.FromResult<Document>(newDocument)));
 				}
 			}
-
-			return;
 		}
 
 		private static async Task<Document> AutoArrangeMembersInType(Document document,

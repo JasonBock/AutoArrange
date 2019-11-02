@@ -26,9 +26,7 @@ namespace AutoArrange
 				new List<AutoArrangeCaptureWalker>();
 			this.Target = node;
 
-			var classNode = node as ClassDeclarationSyntax;
-
-			if (classNode != null)
+			if (node is ClassDeclarationSyntax classNode)
 			{
 				base.VisitClassDeclaration(classNode);
 			}
@@ -45,35 +43,23 @@ namespace AutoArrange
 			this.Types.Add(capture);
 		}
 
-		public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-		{
+		public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node) => 
 			this.Constructors.Add(node);
-		}
 
-		public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
-		{
+		public override void VisitEnumDeclaration(EnumDeclarationSyntax node) => 
 			this.Enums.Add(node);
-		}
 
-		public override void VisitEventFieldDeclaration(EventFieldDeclarationSyntax node)
-		{
+		public override void VisitEventFieldDeclaration(EventFieldDeclarationSyntax node) => 
 			this.Events.Add(node);
-		}
 
-		public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
-		{
+		public override void VisitFieldDeclaration(FieldDeclarationSyntax node) => 
 			this.Fields.Add(node);
-		}
 
-		public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
-		{
+		public override void VisitMethodDeclaration(MethodDeclarationSyntax node) => 
 			this.Methods.Add(node);
-		}
 
-		public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-		{
+		public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node) => 
 			this.Properties.Add(node);
-		}
 
 		public override void VisitStructDeclaration(StructDeclarationSyntax node)
 		{

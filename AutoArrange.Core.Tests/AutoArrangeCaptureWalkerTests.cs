@@ -1,16 +1,15 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.IO;
 
 namespace AutoArrange.Tests
 {
-	[TestClass]
-	public sealed class AutoArrangeCaptureWalkerTests
+	public static class AutoArrangeCaptureWalkerTests
 	{
-		[TestMethod]
-		public void VerifyWalker()
+		[Test]
+		public static void VerifyWalker()
 		{
 			var code = File.ReadAllText(@"Targets\VerifyWalker.cs");
 			var tree = SyntaxFactory.ParseSyntaxTree(code).GetRoot();

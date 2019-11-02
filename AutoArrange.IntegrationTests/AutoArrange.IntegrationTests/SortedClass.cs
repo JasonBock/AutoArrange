@@ -19,28 +19,31 @@ namespace AutoArrange.Tests
 
 	public sealed class SortedClassWithNestedClass
 	{
-		public enum DataValues { A, B, C }
-		private int someProperty;
-
-		public SortedClassWithNestedClass(Guid value) { }
-		public Guid MyProperty { get; private set; }
-		internal string yetAnotherField;
-		public SortedClassWithNestedClass() { }
-		public void Method() { }
 		public string AProperty { get; set; }
 
-		public class InternalSortedClass
-		{
-			public void X() { }
-			public void B() { }
-		}
+		private int someProperty;
+		internal string yetAnotherField;
 
-		internal event EventHandler LoudEvent;
+		public SortedClassWithNestedClass(Guid value) { }
+		public void Method() { }
+		public Guid MyProperty { get; private set; }
 
 		public int SomeProperty
 		{
 			get;
 			internal set;
 		}
+
+		internal event EventHandler LoudEvent;
+
+		public SortedClassWithNestedClass() { }
+
+		public class InternalSortedClass
+		{
+			public void B() { }
+			public void X() { }
+		}
+
+		public enum DataValues { A, B, C }
 	}
 }
