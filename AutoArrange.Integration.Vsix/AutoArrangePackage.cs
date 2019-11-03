@@ -18,6 +18,7 @@ namespace AutoArrange.Integration.Vsix
 	[ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
 	[ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
 	[ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
+	[ProvideMenuResource("Menus.ctmenu", 1)]
 	public sealed class AutoArrangePackage
 		: AsyncPackage
 	{
@@ -36,6 +37,7 @@ namespace AutoArrange.Integration.Vsix
 			this.dte = await this.GetServiceAsync(typeof(DTE)) as DTE;
 			this.documentEvents = this.dte.Events.DocumentEvents as DocumentEventsClass;
 			this.documentEvents.DocumentSaved += this.OnDocumentSaved;
+			await AutoArrangeCommand.InitializeAsync(this);
 		}
 
 		protected override void Dispose(bool disposing)
