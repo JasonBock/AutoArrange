@@ -1,6 +1,6 @@
 using System.Composition;
-using System.Threading;
 using System.Threading.Tasks;
+using AutoArrange.Core.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeRefactorings;
@@ -25,8 +25,7 @@ namespace AutoArrange
 
 			if (node is TypeDeclarationSyntax typeDeclaration)
 			{
-				var newDocument = await AutoArrangeCodeRefactoringProvider.AutoArrangeMembersInType(
-					context.Document, typeDeclaration, context.CancellationToken);
+				var newDocument = await context.Document.AutoArrangeAsync(typeDeclaration, context.CancellationToken);
 
 				if (newDocument != context.Document)
 				{
@@ -35,30 +34,6 @@ namespace AutoArrange
 							_ => Task.FromResult<Document>(newDocument)));
 				}
 			}
-		}
-
-		private static async Task<Document> AutoArrangeMembersInType(Document document,
-			TypeDeclarationSyntax typeDeclaration, CancellationToken cancellationToken)
-		{
-			var captureWalker = new AutoArrangeCaptureWalker(typeDeclaration);
-
-			if (cancellationToken.IsCancellationRequested)
-			{
-				return document;
-			}
-
-			var result = new AutoArrangeReplaceRewriter(
-				captureWalker).VisitTypeDeclaration(typeDeclaration);
-
-			if (cancellationToken.IsCancellationRequested)
-			{
-				return document;
-			}
-
-			var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-			var newTree = root.ReplaceNodes(new[] { typeDeclaration },
-				(a, b) => result);
-			return document.WithSyntaxRoot(newTree);
 		}
 	}
 }

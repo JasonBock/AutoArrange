@@ -6,7 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.6.2" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.10" PrivateAssets="all" />
     <ProjectReference Include="..\AutoArrange.Core\AutoArrange.Core.csproj" />
     <PackageReference Update="NETStandard.Library" PrivateAssets="all" />
   </ItemGroup>

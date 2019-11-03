@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoArrange", "AutoArrange\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoArrange.Vsix", "AutoArrange.Vsix\AutoArrange.Vsix.csproj", "{B847A4D2-7385-425D-9175-44188D9F6DFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoArrange.Core", "AutoArrange.Core\AutoArrange.Core.csproj", "{A1F65B3F-4049-4D57-A59A-2C95AA9F21E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoArrange.Core", "AutoArrange.Core\AutoArrange.Core.csproj", "{A1F65B3F-4049-4D57-A59A-2C95AA9F21E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoArrange.Core.Tests", "AutoArrange.Core.Tests\AutoArrange.Core.Tests.csproj", "{5CFD1D32-EDF3-4516-BBB4-4023FAC51917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoArrange.Core.Tests", "AutoArrange.Core.Tests\AutoArrange.Core.Tests.csproj", "{5CFD1D32-EDF3-4516-BBB4-4023FAC51917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoArrange.Tests", "AutoArrange.Tests\AutoArrange.Tests.csproj", "{4DD22A81-615B-4BC2-A7B4-7BEC6148F9DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoArrange.Tests", "AutoArrange.Tests\AutoArrange.Tests.csproj", "{4DD22A81-615B-4BC2-A7B4-7BEC6148F9DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoArrange.Integration.Vsix", "AutoArrange.Integration.Vsix\AutoArrange.Integration.Vsix.csproj", "{3B244D34-44D9-474A-9ECC-07C8FF938C0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4DD22A81-615B-4BC2-A7B4-7BEC6148F9DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DD22A81-615B-4BC2-A7B4-7BEC6148F9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DD22A81-615B-4BC2-A7B4-7BEC6148F9DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B244D34-44D9-474A-9ECC-07C8FF938C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B244D34-44D9-474A-9ECC-07C8FF938C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B244D34-44D9-474A-9ECC-07C8FF938C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B244D34-44D9-474A-9ECC-07C8FF938C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
